@@ -1,186 +1,201 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Controle sua Glicose e Viva Melhor!</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;900&display=swap" rel="stylesheet">
-    <style>
-        /* Estilos Globais */
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #0a0b1e;
-            color: #fff;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-            background-image: url('https://images.unsplash.com/photo-1532938314465-ca86e3ca84ac?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* Imagem azul que remete à medicina */
-            background-size: cover;
-            background-position: center;
-            background-blend-mode: overlay; /* Adiciona uma camada escura sobre a imagem */
-        }
+/* Estilos Gerais */
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f0f9ff;
+    color: #334155;
+    margin: 0;
+    padding: 0;
+}
 
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5); /* Ajuste a opacidade aqui */
-            z-index: -1; /* Garante que a camada escura fique atrás do conteúdo */
-        }
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px;
+}
 
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+/* Cabeçalho */
+header {
+    background-color: #e2e8f0;
+    text-align: center;
+    padding: 40px 0;
+}
 
-        /* Headline */
-        h1 {
-            font-size: 3em;
-            font-weight: 900;
-            text-align: center;
-            margin: 20px auto;
-            color: #fff;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra para destacar o texto */
-        }
+header h1 {
+    color: #2563eb;
+    font-size: 2.5em;
+    font-weight: 900; /* Garante o peso 900 */
+    margin-bottom: 10px;
+    margin-top: 20px; /* Adiciona 20px de margem no topo */
+    text-align: center; /* Centraliza o texto */
+}
 
-        /* Sub-Headline */
-        h2 {
-            font-size: 1.5em;
-            text-align: center;
-            color: #ddd;
-            margin-bottom: 30px;
-        }
+header p {
+    font-size: 1.2em;
+    color: #64748b;
+}
 
-        /* Video */
-        .video-container {
-            max-width: 900px;
-            margin: 0 auto;
-            position: relative;
-            padding-bottom: 56.25%; /* Proporção 16:9 para responsividade */
-            height: 0;
-            overflow: hidden;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        }
+.selo-especialista {
+    width: 150px;
+    margin-top: 20px;
+}
 
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
+/* Seção do Vídeo */
+#video {
+    background-color: #ffffff;
+    padding: 40px 0;
+}
 
-        /* Contador */
-        .countdown-container {
-            text-align: center;
-            margin-top: 30px;
-        }
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+}
 
-        .countdown-label {
-            font-size: 1.2em;
-            color: #eee;
-            margin-bottom: 10px;
-        }
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
 
-        .countdown {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
+/* Contador Regressivo */
+#contador {
+    background-color: #cbd5e0;
+    text-align: center;
+    padding: 40px 0;
+}
 
-        .countdown-item {
-            background-color: #ff0;
-            color: #000;
-            font-size: 2em;
-            padding: 10px 20px;
-            border-radius: 20px;
-            min-width: 60px;
-        }
+#contador h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
 
-        /* Botão */
-        .cta-button {
-            display: block;
-            width: 80%;
-            max-width: 300px;
-            margin: 30px auto;
-            padding: 15px 30px;
-            background-color: #22c55e;
-            color: #fff;
-            font-size: 1.3em;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 30px;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
+.countdown {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #2563eb;
+}
 
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        }
+.countdown span {
+    background-color: #fde047;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
 
-        /* Depoimentos */
-        .testimonials-container {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 40px;
-            flex-wrap: wrap; /* Permite que os depoimentos quebrem para a linha de baixo em telas menores */
-        }
+/* Botão de Vendas */
+#cta {
+    text-align: center;
+    padding: 40px 0;
+}
 
-        .testimonial {
-            width: 300px;
-            padding: 20px;
-            text-align: center;
-            border: 5px solid #fff;
-            background: linear-gradient(to bottom, #3b82f6, #000);
-            border-radius: 15px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
+.botao-vendas {
+    display: inline-block;
+    background-color: #22c55e;
+    color: #ffffff;
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 15px 30px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
 
-        .testimonial img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 15px;
-        }
+.botao-vendas:hover {
+    background-color: #16a34a;
+}
 
-        .testimonial p {
-            font-style: italic;
-            color: #eee;
-        }
+/* Seção do Especialista */
+#especialista {
+    background-color: #ffffff;
+    text-align: center;
+    padding: 40px 0;
+}
 
-        /* Chat Fake */
-        .chat-container {
-            margin-top: 50px;
-            padding: 20px;
-            background-color: #1e293b;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
+.foto-especialista {
+    width: 150px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
 
-        .chat-message {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 15px;
-        }
+#especialista h2 {
+    font-size: 2em;
+    color: #2563eb;
+    margin-bottom: 10px;
+}
 
-        .chat-message img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-right: 10px;
-        }
+#especialista h3 {
+    font-size: 1.2em;
+    color: #64748b;
+    margin-bottom: 20px;
+}
 
-        .message-content {
-            background-color: #334155;
-            color: #fff;
-            padding: 
+#especialista p {
+    font-size: 1.1em;
+    color: #334155;
+    line-height: 1.5;
+}
+
+.depoimento {
+    font-style: italic;
+    margin-top: 20px;
+}
+
+/* Estilos do Chat Fake */
+#chat {
+    background-color: #ffffff;
+    padding: 20px;
+}
+
+.chat-container {
+    max-width: 600px;
+    margin: 0 auto;
+    border: 1px solid #d1d5db;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.chat-messages {
+    padding: 10px;
+    height: 300px;
+    overflow-y: scroll;
+}
+
+.message {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+.message img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.message-content {
+    background-color: #e2e8f0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.chat-input {
+    display: flex;
+    padding: 10px;
+    background-color: #f0f9ff;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.chat-input button {
+    background-color: #2563eb;
+    color: #ffffff;
+    padding: 
