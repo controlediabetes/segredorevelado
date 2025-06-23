@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle sua Glicose e Viva Melhor!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;900&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos Globais */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0a0b1e;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background-image: url('https://cdn.pixabay.com/photo/2024/02/13/22/20/eibsee-8572003_1280.jpg'); /* Substitua pelo link da sua imagem */
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay; /* Adiciona uma camada escura sobre a imagem */
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Ajuste a opacidade aqui */
+            z-index: -1; /* Garante que a camada escura fique atrás do conteúdo */
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Headline */
+        h1 {
+            font-size: 3em;
+            font-weight: 900;
+            text-align: center;
+            margin: 20px auto;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra para destacar o texto */
+        }
+
+        /* Sub-Headline */
+        h2 {
+            font-size: 1.5em;
+            text-align: center;
+            color: #ddd;
+            margin-bottom: 30px;
+        }
+
+        /* Video */
+        .video-container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            padding-bottom: 56.25%; /* Proporção 16:9 para responsividade */
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Contador */
+        .countdown-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .countdown-label {
+            font-size: 1.2em;
+            color: #eee;
+            margin-bottom: 10px;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .countdown-item {
+            background-color: #ff0;
+            color: #000;
+            font-size: 2em;
+            padding: 10px 20px;
+            border-radius: 20px;
+            min-width: 60px;
+        }
+
+        /* Botão */
+        .cta-button {
+            display: block;
+            width: 80%;
+            max-width: 300px;
+            margin: 30px auto;
+            padding: 15px 30px;
+            background-color: #22c55e;
+            color: #fff;
+            font-size: 1.3em;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Depoimentos */
+        .testimonials-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 40px;
+            flex-wrap: wrap; /* Permite que os depoimentos quebrem para a linha de baixo em telas menores */
+        }
+
+        .testimonial {
+            width: 300px;
+            padding: 20px;
+            text-align: center;
+            border: 5px solid #fff;
+            background: linear-gradient(to bottom, #3b82f6, #000);
+            border-radius: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .testimonial img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+        .testimonial p {
+            font-style: italic;
+            color: #eee;
+        }
+
+        /* Chat Fake */
+        .chat-container {
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #1e293b;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .chat-message {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .chat-message img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+
+        .message-content {
+            background-color: #334155;
+            color: #fff;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 0.9em;
+        }
+
+        .chat-input {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .chat-input input {
+            flex-grow: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #475569;
+            color: #fff;
+        }
+
+        .chat-input button {
+            background-color: #2563eb;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .chat-input button:hover {
+            background-color: #3b82f6;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #000;
+            color: #777;
+            margin-top: 50px;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+
+            h2 {
+                font-size: 1.2em;
+            }
+
+            .video-container {
+                max-width: 100%;
+                padding-bottom: 75%; /* Ajuste a proporção para telas menores */
+            }
+
+            .countdown {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .testimonials-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .testimonial {
+                width: 90%;
+            }
+
+            .chat-input {
+                flex-direction: column;
+            }
+
+            .chat-input button {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Glicose nas alturas te dominando? <br> <strong>Liberte-se da Diabetes e Reconquiste Sua Vida!</strong></h1>
+        <h2>Cansado de picadas, dietas restritivas e medo constante? Descubra o método natural que está revolucionando o controle da glicose e devolvendo a alegria de viver a milhares de diabéticos.</h2>
+
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/YOUR_YOUTUBE_VIDEO_ID" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+
+        <div class="countdown-container">
+            <div class="countdown-label">Oferta expira em:</div>
+            <div class="countdown">
+                <div class="countdown-item"><span id="days">00</span> Dias</div>
+                <div class="countdown-item"><span id="hours">00</span> Horas</div>
+                <div class="countdown-item"><span id="minutes">00</span> Minutos</div>
+                <div class="countdown-item"><span id="seconds">00</span> Segundos</div>
+            </div>
+        </div>
+
+        <a href="#" class="cta-button">Quero Controlar Minha Glicose Agora!</a>
+
+        <div class="testimonials-container">
+            <div class="testimonial">
+                <img src="https://thispersondoesnotexist.com/" alt="Depoimento 1">
+                <strong>Maria Silva</strong>
+                <p>"Desde que comecei a usar este método, minha glicose está sob controle e me sinto muito mais disposta!"</p>
+            </div>
+            <div class="testimonial">
+                <img src="https://thispersondoesnotexist.com/" alt="Depoimento 2">
+                <strong>João Santos</strong>
+                <p>"Eu estava desesperado com a diabetes, mas este programa me deu uma nova esperança e qualidade de vida."</p>
+            </div>
+            <div class="testimonial">
+                <img src="https://thispersondoesnotexist.com/" alt="Depoimento 3">
+                <strong>Ana Oliveira</strong>
+                <p>"Recomendo a todos que sofrem com diabetes. É um divisor de águas!"</p>
+            </div>
+        </div>
+
+        <div class="chat-container">
+            <h3>Comunidade de Diabéticos Saudáveis</h3>
+            <div id="chat-messages">
+                <div class="chat-message">
+                    <img src="https://thispersondoesnotexist.com/" alt="Avatar">
+                    <div class="message-content">Olá! Alguém mais aqui conseguiu reduzir a medicação com este método?</div>
+                </div>
+                <div class="chat-message">
+                    <img src="https://thispersondoesnotexist.com/" alt="Avatar">
+                    <div class="message-content">Eu consegui! Minha glicose está estável e o médico diminuiu a dose.</div>
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="message-input" placeholder="Digite sua mensagem...">
+                <button id="send-button">Enviar</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 - Todos os direitos reservados | Este site não é afiliado ao Facebook ou a qualquer entidade do Facebook.</p>
+    </footer>
+
+    <script>
+        // Countdown Timer
+        function getTimeRemaining(endtime) {
+            const total = Date.parse(endtime) - Date.parse(new Date());
+            const seconds = Math.floor((total / 1000) % 60);
+            const minutes = Math.floor((total / (1000 * 60)) % 60);
+            const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
+            const days = Math.floor(total / (1000 * 60 * 60 * 24));
+            return {
+                total,
+                days,
+                hours,
+                minutes,
+                seconds
+            };
+        }
+
+        function initializeClock(id, endtime) {
+            const daysSpan = document.getElementById('days');
+            const hoursSpan = document.getElementById('hours');
+            const minutesSpan = document.getElementById('minutes');
+            const secondsSpan = document.getElementById('seconds');
+
+            function updateClock() {
+                const t = getTimeRemaining(endtime);
+
+                daysSpan.innerText = t.days.toString().padStart(2, '0');
+                hoursSpan.innerText = t.hours.toString().padStart(2, '0');
+                minutesSpan.innerText = t.minutes.toString().padStart(2, '0');
+                secondsSpan.innerText = t.seconds.toString().padStart(2, '0');
+
+                if (t.total <= 0) {
+                    clearInterval(timeinterval);
+                    daysSpan.innerText = '00';
+                    hoursSpan.innerText = '00';
+                    minutesSpan.innerText = '00';
+                    secondsSpan.innerText = '00';
+                }
+            }
+
+            updateClock();
+            const timeinterval = setInterval(updateClock, 1000);
+        }
+
+        // Set the date we're counting down to
+        const deadline = new Date(Date.parse(new Date()) + 7 * 24 * 60 * 60 * 1000); // 7 days from now
+        initializeClock('countdown', deadline);
+
+        // Chat Functionality
+        const chatMessages = document.getElementById('chat-messages');
+        const messageInput = document.getElementById('message-input');
+        const sendButton = document.getElementById('send-button');
+
+        function addMessage(message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('chat-message');
+            messageDiv.innerHTML = `
+                <img src="https://thispersondoesnotexist.com/" alt="Avatar">
+                <div class="message-content">${message}</div>
+            `;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to bottom
+        }
+
+        sendButton.addEventListener('click', function() {
+            const messageText = messageInput.value;
+            if (messageText.trim() !== '') {
+                addMessage(messageText);
+                messageInput.value = '';
+            }
+        });
+
+        messageInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                sendButton.click();
+            }
+        });
+
+        // Initial Chat Messages
+        setTimeout(() => addMessage("Olá pessoal! Alguém mais com dificuldades para controlar a glicose?"), 1000);
+        setTimeout(() => addMessage("Eu também! Estou buscando alternativas."), 3000);
+        setTimeout(() => addMessage("Já ouvi falar muito bem deste método. Alguém já testou?"), 5000);
+        setTimeout(() => addMessage("Eu testei e estou adorando! Minha glicose está mais estável."), 7000);
+
+    </script>
+</body>
+</html>
