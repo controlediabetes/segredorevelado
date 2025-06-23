@@ -1,135 +1,387 @@
-// Função para calcular o tempo restante
-function getTimeRemaining(endtime) {
-    const total = Date.parse(endtime) - Date.parse(new Date());
-    const segundos = Math.floor((total / 1000) % 60);
-    const minutos = Math.floor((total / 1000 / 60) % 60);
-    const horas = Math.floor((total / (1000 * 60 * 60)) % 24);
-    const dias = Math.floor(total / (1000 * 60 * 60 * 24));
+<!DOCTYPE html>
+<html lang="pt-BR">
 
-    return {
-        total,
-        dias,
-        horas,
-        minutos,
-        segundos
-    };
-}
-
-function initializeClock(id, endtime) {
-    const clock = document.querySelector('.countdown');
-    const diasSpan = clock.querySelector('#dias');
-    const horasSpan = clock.querySelector('#horas');
-    const minutosSpan = clock.querySelector('#minutos');
-    const segundosSpan = clock.querySelector('#segundos');
-
-    function updateClock() {
-        const t = getTimeRemaining(endtime);
-
-        diasSpan.innerHTML = t.dias;
-        horasSpan.innerHTML = ('0' + t.horas).slice(-2);
-        minutosSpan.innerHTML = ('0' + t.minutos).slice(-2);
-        segundosSpan.innerHTML = ('0' + t.segundos).slice(-2);
-
-        if (t.total <= 0) {
-            clearInterval(timeInterval);
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle sua Glicose e Viva Melhor!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Estilos Globais */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff;
+            /* Tom de azul claro */
+            color: #333;
+            line-height: 1.6;
         }
-    }
 
-    updateClock();
-    const timeInterval = setInterval(updateClock, 1000);
-}
+        /* Headline */
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            text-align: center;
+            margin: 20px 0;
+            color: #191970;
+            /* Azul marinho */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            /* Sombra para destacar */
+        }
 
-// Define a data de término do contador (7 dias a partir de agora)
-const deadline = new Date(Date.parse(new Date()) + 7 * 24 * 60 * 60 * 1000);
-initializeClock('countdown', deadline);
+        /* Sub-headline */
+        h2 {
+            font-size: 1.5rem;
+            text-align: center;
+            color: #555;
+            margin-bottom: 30px;
+        }
 
+        /* Imagem de Fundo */
+        body {
+            background-image: url('https://media.istockphoto.com/id/1322906072/pt/foto/happy-latin-female-blogger-using-smartphone-with-social-media-notification-icons-sitting-in.jpg?s=612x612&w=0&k=20&c=Z7e2U7teoVZZiCZdJJoyz-4BUuWW_VfFp7dLEQ0Pn34=');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            /* Efeito parallax */
+            position: relative;
+        }
 
-// Chat Fake
-const chatMessages = document.querySelector('.chat-messages');
-const messageInput = document.querySelector('#message-input');
-const sendButton = document.querySelector('#send-button');
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.7);
+            /* Camada semi-transparente */
+            z-index: -1;
+        }
 
-// Lista de mensagens fakes
-const fakeMessages = [
-    {
-        name: "Maria Silva",
-        message: "Estou muito feliz com os resultados que obtive com este produto!",
-        image: "https://thispersondoesnotexist.com/image"
-    },
-    {
-        name: "João Pedro",
-        message: "Realmente funciona! Minha glicose está controlada como nunca antes.",
-        image: "https://thispersondoesnotexist.com/image"
-    },
-    {
-        name: "Ana Clara",
-        message: "Recomendo a todos que sofrem com diabetes. Este produto mudou minha vida!",
-        image: "https://thispersondoesnotexist.com/image"
-    }
-];
+        /* Container para o vídeo */
+        .video-container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            /* Fundo semi-transparente */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
 
-// Função para adicionar uma mensagem ao chat
-function addMessage(name, message, image) {
-    const messageElement = document.createElement('div');
-    messageElement.classList.add('message');
+        .video-container iframe {
+            width: 100%;
+            height: auto;
+            max-height: 390px;
+            display: block;
+            margin: 0 auto;
+            border-radius: 8px;
+        }
 
-    messageElement.innerHTML = `
-        <img src="${image}" alt="${name}">
-        <div class="message-content">
-            <strong>${name}</strong>
-            <p>${message}</p>
+        /* Contador Regressivo */
+        .countdown-container {
+            text-align: center;
+            margin: 30px 0;
+            color: #333;
+        }
+
+        .countdown-container p {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .countdown div {
+            background-color: #ffda63;
+            /* Amarelo suave */
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            min-width: 50px;
+            /* Garante um tamanho mínimo */
+        }
+
+        /* Botão */
+        .cta-button {
+            display: block;
+            margin: 30px auto;
+            padding: 15px 30px;
+            background-color: #28a745;
+            /* Verde */
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            max-width: 300px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #218838;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Depoimentos */
+        .testimonials-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px auto;
+            max-width: 1000px;
+            flex-wrap: wrap;
+            /* Quebra em telas menores */
+        }
+
+        .testimonial {
+            width: 300px;
+            background: linear-gradient(to bottom, #4682B4, #000080);
+            /* Azul degrade com preto */
+            border: 5px solid #fff;
+            border-radius: 15px;
+            text-align: center;
+            padding: 20px;
+            color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .testimonial img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            margin-top: 15px;
+            /* Ajuste de margem */
+            border: 2px solid #fff;
+        }
+
+        .testimonial h3 {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .testimonial p {
+            font-style: italic;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        /* Chat Fake */
+        .chat-container {
+            max-width: 700px;
+            margin: 30px auto;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .chat-messages {
+            height: 300px;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        .message {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .message img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+
+        .message-content {
+            background-color: #e5e5ea;
+            border-radius: 10px;
+            padding: 10px;
+            font-size: 0.9rem;
+            color: #333;
+        }
+
+        .chat-input {
+            display: flex;
+            margin-top: 15px;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .chat-input button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        /* Especialista */
+        .expert-container {
+            max-width: 700px;
+            margin: 30px auto;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .expert-container img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+        .expert-container h3 {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .expert-container p {
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #343a40;
+            /* Cinza escuro */
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+            }
+
+            .video-container {
+                padding: 10px;
+            }
+
+            .testimonials-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .testimonial {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Glicose nas Alturas? Descubra o Segredo para Controlar sua Diabetes e Viver com Mais Energia!</h1>
+
+    <h2>Diga Adeus às Preocupações com a Glicose Alta e Recupere o Controle da Sua Saúde com um Método Natural e Eficaz. Assista ao Vídeo e Descubra Como!</h2>
+
+    <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/6wAwdx3838Q" title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+    </div>
+
+    <div class="countdown-container">
+        <p>Oferta expira em:</p>
+        <div class="countdown">
+            <div>23</div>
+            <div>59</div>
+            <div>59</div>
         </div>
-    `;
+    </div>
 
-    chatMessages.appendChild(messageElement);
+    <a href="https://pay.kiwify.com.br/4K0A9aJ" class="cta-button">Descubra o Segredo Agora!</a>
 
-    // Rola para a última mensagem
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-}
-
-// Adiciona mensagens fakes iniciais
-fakeMessages.forEach(message => {
-    addMessage(message.name, message.message, message.image);
-});
-
-// Adiciona uma mensagem do usuário
-function addUserMessage(message) {
-    const userMessage = document.createElement('div');
-    userMessage.classList.add('message');
-
-    userMessage.innerHTML = `
-        <img src="https://thispersondoesnotexist.com/image" alt="Você">
-        <div class="message-content">
-            <strong>Você</strong>
-            <p>${message}</p>
+    <div class="testimonials-container">
+        <div class="testimonial">
+            <img src="https://thispersondoesnotexist.com/" alt="Maria Silva">
+            <h3>Maria Silva</h3>
+            <p>"Eu estava sempre preocupada com a minha glicose alta, mas depois que comecei a usar este produto, minha
+                vida mudou completamente! Agora eu me sinto mais saudável e cheia de energia."</p>
         </div>
-    `;
+        <div class="testimonial">
+            <img src="https://thispersondoesnotexist.com/" alt="João Santos">
+            <h3>João Santos</h3>
+            <p>"Eu já tentei de tudo para controlar minha diabetes, mas nada funcionava. Este produto foi a solução que eu
+                estava procurando! Minha glicose está controlada e eu me sinto muito melhor."</p>
+        </div>
+        <div class="testimonial">
+            <img src="https://thispersondoesnotexist.com/" alt="Ana Oliveira">
+            <h3>Ana Oliveira</h3>
+            <p>"Eu estava com medo de ter complicações por causa da diabetes, mas este produto me ajudou a controlar a
+                glicose e viver com mais tranquilidade. Recomendo a todos que sofrem com este problema!"</p>
+        </div>
+    </div>
 
-    chatMessages.appendChild(userMessage);
+    <div class="chat-container">
+        <div class="chat-messages">
+            <div class="message">
+                <img src="https://thispersondoesnotexist.com/" alt="Avatar 1">
+                <div class="message-content">Olá! Alguém já usou este produto para diabetes?</div>
+            </div>
+            <div class="message">
+                <img src="https://thispersondoesnotexist.com/" alt="Avatar 2">
+                <div class="message-content">Eu usei e minha glicose está controlada!</div>
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" placeholder="Digite sua mensagem...">
+            <button>Enviar</button>
+        </div>
+    </div>
 
-    // Rola para a última mensagem
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-}
+    <div class="expert-container">
+        <img src="https://thispersondoesnotexist.com/" alt="Dr. Paulo Henrique">
+        <h3>Dr. Paulo Henrique</h3>
+        <p>Nutricionista Especializado em Diabetes</p>
+        <p>"Com mais de 15 anos de experiência no tratamento de diabetes, o Dr. Paulo Henrique é um renomado
+            nutricionista que já ajudou milhares de pessoas a controlar a glicose e viver com mais saúde e bem-estar.
+            Sua abordagem inovadora e personalizada tem transformado a vida de pacientes em todo o Brasil."</p>
+    </div>
 
-// Envia a mensagem do usuário ao clicar no botão
-sendButton.addEventListener('click', () => {
-    const message = messageInput.value;
-    if (message) {
-        addUserMessage(message);
-        messageInput.value = '';
+    <footer>
+        <p>&copy; 2024 Todos os direitos reservados. Este site não é afiliado ao Facebook ou a qualquer uma de suas
+            entidades. Os conteúdos aqui apresentados são de responsabilidade exclusiva dos seus autores.</p>
+    </footer>
 
-        // Simula uma resposta fake após alguns segundos
-        setTimeout(() => {
-            const randomIndex = Math.floor(Math.random() * fakeMessages.length);
-            const randomMessage = fakeMessages[randomIndex];
-            addMessage(randomMessage.name, randomMessage.message, randomMessage.image);
-        }, 2000);
-    }
-});
+</body>
 
-// Envia a mensagem do usuário ao pressionar Enter
-messageInput.addEventListener('keyup', event => {
-    if (event.key === 'Enter') {
-        sendButton.click();
-    }
-});
+</html>
