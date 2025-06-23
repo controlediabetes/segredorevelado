@@ -1,12 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-
-<head>
+<html lang="pt-BR"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Controle sua Glicose e Viva Melhor!</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&amp;display=swap" rel="stylesheet">
     <style>
         /* Estilos Globais */
         body {
@@ -314,9 +311,7 @@
     <h2>Diga Adeus às Preocupações com a Glicose Alta e Recupere o Controle da Sua Saúde com um Método Natural e Eficaz. Assista ao Vídeo e Descubra Como!</h2>
 
     <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/6wAwdx3838Q" title="YouTube video player" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/6wAwdx3838Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
     </div>
 
     <div class="countdown-container">
@@ -348,165 +343,5 @@
             <img src="https://thispersondoesnotexist.com/" alt="Ana Oliveira">
             <h3>Ana Oliveira</h3>
             <p>"Eu estava com medo de ter complicações por causa da diabetes, mas este produto me ajudou a controlar a
-                glicose e viver com mais tranquilidade. Recomendo a todos que sofrem com este problema!"</p>
-        </div>
-    </div>
-
-    <div class="chat-container">
-        <div class="chat-messages">
-        </div>
-        <div class="chat-input">
-            <input type="text" id="message-input" placeholder="Digite sua mensagem...">
-            <button id="send-button">Enviar</button>
-        </div>
-    </div>
-
-    <div class="expert-container">
-        <img src="https://thispersondoesnotexist.com/" alt="Dr. Paulo Henrique">
-        <h3>Dr. Paulo Henrique</h3>
-        <p>Nutricionista Especializado em Diabetes</p>
-        <p>"Com mais de 15 anos de experiência no tratamento de diabetes, o Dr. Paulo Henrique é um renomado
-            nutricionista que já ajudou milhares de pessoas a controlar a glicose e viver com mais saúde e bem-estar.
-            Sua abordagem inovadora e personalizada tem transformado a vida de pacientes em todo o Brasil."</p>
-    </div>
-
-    <footer>
-        <p>&copy; 2024 Todos os direitos reservados. Este site não é afiliado ao Facebook ou a qualquer uma de suas
-            entidades. Os conteúdos aqui apresentados são de responsabilidade exclusiva dos seus autores.</p>
-    </footer>
-
-    <script>
-        // Função para calcular o tempo restante
-        function getTimeRemaining(endtime) {
-            const total = Date.parse(endtime) - Date.parse(new Date());
-            const segundos = Math.floor((total / 1000) % 60);
-            const minutos = Math.floor((total / 1000 / 60) % 60);
-            const horas = Math.floor((total / (1000 * 60 * 60)) % 24);
-            const dias = Math.floor(total / (1000 * 60 * 60 * 24));
-
-            return {
-                total,
-                dias,
-                horas,
-                minutos,
-                segundos
-            };
-        }
-
-        function initializeClock(id, endtime) {
-            const clock = document.querySelector('.countdown');
-            const diasSpan = clock.querySelector('#dias');
-            const horasSpan = clock.querySelector('#horas');
-            const minutosSpan = clock.querySelector('#minutos');
-            const segundosSpan = clock.querySelector('#segundos');
-
-            function updateClock() {
-                const t = getTimeRemaining(endtime);
-
-                diasSpan.innerHTML = t.dias;
-                horasSpan.innerHTML = ('0' + t.horas).slice(-2);
-                minutosSpan.innerHTML = ('0' + t.minutos).slice(-2);
-                segundosSpan.innerHTML = ('0' + t.segundos).slice(-2);
-
-                if (t.total <= 0) {
-                    clearInterval(timeInterval);
-                }
-            }
-
-            updateClock();
-            const timeInterval = setInterval(updateClock, 1000);
-        }
-
-        // Define a data de término do contador (7 dias a partir de agora)
-        const deadline = new Date(Date.parse(new Date()) + 7 * 24 * 60 * 60 * 1000);
-        initializeClock('countdown', deadline);
-
-        // Chat Fake
-        const chatMessages = document.querySelector('.chat-messages');
-        const messageInput = document.querySelector('#message-input');
-        const sendButton = document.querySelector('#send-button');
-
-        // Lista de mensagens fakes
-        const fakeMessages = [{
-                name: "Maria Silva",
-                message: "Estou muito feliz com os resultados que obtive com este produto!",
-                image: "https://thispersondoesnotexist.com/"
-            },
-            {
-                name: "João Pedro",
-                message: "Realmente funciona! Minha glicose está controlada como nunca antes.",
-                image: "https://thispersondoesnotexist.com/"
-            },
-            {
-                name: "Ana Clara",
-                message: "Recomendo a todos que sofrem com diabetes. Este produto mudou minha vida!",
-                image: "https://thispersondoesnotexist.com/"
-            }
-        ];
-
-        // Função para adicionar uma mensagem ao chat
-        function addMessage(name, message, image) {
-            const messageElement = document.createElement('div');
-            messageElement.classList.add('message');
-            messageElement.innerHTML = `
-                <img src="${image}" alt="${name}">
-                <div class="message-content">
-                    <strong>${name}</strong>
-                    <p>${message}</p>
-                </div>
-            `;
-            chatMessages.appendChild(messageElement);
-
-            // Rola para a última mensagem
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-
-        // Adiciona mensagens fakes iniciais
-        fakeMessages.forEach(message => {
-            addMessage(message.name, message.message, message.image);
-        });
-
-        // Adiciona uma mensagem do usuário
-        function addUserMessage(message) {
-            const userMessage = document.createElement('div');
-            userMessage.classList.add('message');
-            userMessage.innerHTML = `
-                
-                <div class="message-content">
-                    <strong>Você</strong>
-                    <p>${message}</p>
-                </div>
-            `;
-            chatMessages.appendChild(userMessage);
-
-            // Rola para a última mensagem
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-
-        // Envia a mensagem do usuário ao clicar no botão
-        sendButton.addEventListener('click', () => {
-            const message = messageInput.value;
-            if (message) {
-                addUserMessage(message);
-                messageInput.value = '';
-
-                // Simula uma resposta fake após alguns segundos
-                setTimeout(() => {
-                    const randomIndex = Math.floor(Math.random() * fakeMessages.length);
-                    const randomMessage = fakeMessages[randomIndex];
-                    addMessage(randomMessage.name, randomMessage.message, randomMessage.image);
-                }, 2000);
-            }
-        });
-
-        // Envia a mensagem do usuário ao pressionar Enter
-        messageInput.addEventListener('keyup', event => {
-            if (event.key === 'Enter') {
-                sendButton.click();
-            }
-        });
-    </script>
-
-</body>
-
-</html>
+                glicose e viver com mais
+</p></div></div></body></html>
