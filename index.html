@@ -128,11 +128,22 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
             box-shadow: 0 4px 8px var(--shadow-color);
+            animation: pulse 1.5s infinite alternate;
         }
 
         .cta-button:hover {
             transform: translateY(-5px);
             box-shadow: 0 6px 12px var(--shadow-color);
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(1.05);
+            }
         }
 
         /* Estilos dos Depoimentos */
@@ -272,6 +283,10 @@
             margin-top: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 8px var(--shadow-color);
+            width: 70%;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left;
         }
 
         .faq-section h2 {
@@ -335,13 +350,17 @@
             margin-top: 10px;
         }
 
-        /* Estilos para o aviso de acesso vitalício */
-        .lifetime-access {
+        /* Estilos para o aviso de garantia */
+        .guarantee-section {
             text-align: center;
-            margin-top: 10px;
-            font-size: 1.1em;
-            color: var(--success-green);
-            font-weight: bold;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: var(--secondary-bg);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px var(--shadow-color);
+            width: 70%;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         /* Estilos para os selos de segurança */
@@ -416,35 +435,91 @@
             cursor: pointer;
         }
 
-        /* Responsividade */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5em;
-            }
+        /* Estilos para a progress bar */
+        #progress-bar-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color: #eee;
+            z-index: 1000;
+        }
 
-            h2 {
-                font-size: 1.2em;
-            }
+        #progress-bar {
+            height: 5px;
+            background-color: var(--success-green);
+            width: 0%;
+        }
 
-            .testimonial {
-                width: 100%;
-            }
+        /* Estilos para o botão de compra fixo */
+        .sticky-cta {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--success-green);
+            color: var(--white);
+            text-align: center;
+            padding: 15px;
+            font-size: 1.3em;
+            text-decoration: none;
+            z-index: 1000;
+            box-shadow: 0 -2px 5px var(--shadow-color);
+        }
 
-            .testimonials-container {
-                flex-direction: column;
-                align-items: center;
-            }
+        /* Estilos para o chat do Facebook */
+        .fb-comments {
+            background-color: var(--white);
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px var(--shadow-color);
+            width: 70%;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-            .chat-section {
-                width: 90%;
-            }
+        .fb-comments h2 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Estilos para o aviso de garantia */
+        .guarantee-section {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: var(--secondary-bg);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px var(--shadow-color);
+        }
+
+        /* Estilos para a seção do vídeo de alerta */
+        .alert-video-section {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #fce4ec;
+            /* Rosa claro */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px var(--shadow-color);
         }
     </style>
 </head>
 
 <body>
+    <!-- Barra de progresso -->
+    <div id="progress-bar-container">
+        <div id="progress-bar"></div>
+    </div>
 
-    <!-- Data Collection Form -->
+    <!-- Botão de compra fixo -->
+    <a href="https://pay.kiwify.com.br/4K0A9aJ" class="sticky-cta">
+        🚀 Quero Controlar Minha Glicose Agora!
+    </a>
+    <!-- Formulário de coleta de dados -->
     <div class="data-collection-form" id="dataCollectionForm">
         <form id="userDataForm">
             <h2>Não vá embora!</h2>
@@ -456,7 +531,7 @@
         </form>
     </div>
 
-    <!-- WhatsApp Button -->
+    <!-- Botão do WhatsApp -->
     <a href="https://wa.me/5547992691983" class="whatsapp-button" target="_blank">
         <i class="fab fa-whatsapp"></i> Dúvidas?
     </a>
@@ -487,7 +562,7 @@
         </div>
     </section>
 
-    <!-- Countdown Section -->
+    <!-- Contador Regressivo -->
     <section class="countdown-section">
         <div class="countdown-container">
             <p class="countdown-text">Oferta expira em:</p>
@@ -510,7 +585,23 @@
         <a href="https://pay.kiwify.com.br/4K0A9aJ" class="cta-button">Quero Controlar Minha Glicose Agora!</a>
         <p class="lifetime-access">✅ Acesso VITALÍCIO ao e-book e todas as atualizações!</p>
     </section>
-
+    <!-- Seção do vídeo de alerta -->
+    <section class="alert-video-section">
+        <h2>⚠️ Essa mensagem não é pra assustar… mas pra te alertar antes que seja tarde.</h2>
+        <p>A diabetes não controlada destrói o corpo por dentro, silenciosamente. E o que começa com glicose alta… pode terminar com
+            algo que ninguém quer nem imaginar: amputações.</p>
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/y8jbHhI_-8A" title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+        </div>
+        <p>📉 Pé diabético, feridas que não cicatrizam, infecções perigosas — tudo isso pode ser evitado com uma coisa simples:
+            Alimentação correta, todos os dias.</p>
+        <p>🍽️ Foi por isso que criamos o guia “Diabetes Sob Controle – 31 Dias de Refeições” Com receitas simples, baratas e seguras
+            pra você equilibrar sua glicose naturalmente — sem fórmulas mágicas, sem sofrimento.</p>
+        <p>E depois, se você quer cuidar da sua saúde de verdade… 👉 Clique no botão e comece hoje. Não espere a dor te obrigar a
+            mudar.</p>
+    </section>
     <!-- Testimonials Section -->
     <section class="testimonials-section">
         <div class="testimonials-container">
@@ -569,16 +660,19 @@
         </div>
     </section>
 
-    <!-- Chat Section (Remodelado) -->
-    <section class="chat-section">
-        <h2>Dúvidas? Fale Conosco!</h2>
-        <div class="chat-container" id="chat-container">
-            <!-- Mensagens do chat serão adicionadas aqui -->
+    <!-- Chat do Facebook -->
+    <section class="fb-comments">
+        <h2>Comentários do Facebook</h2>
+        <div class="fb-comments-box">
+            <p>Compartilhe sua experiência e veja o que outros estão dizendo!</p>
         </div>
-        <div class="chat-input">
-            <input type="text" id="message-input" placeholder="Digite sua mensagem...">
-            <button id="send-button">Enviar</button>
-        </div>
+    </section>
+
+    <!-- Seção de garantia -->
+    <section class="guarantee-section">
+        <h2>Garantia Incondicional de 7 Dias</h2>
+        <p>Estamos tão confiantes de que você vai amar este e-book que oferecemos uma garantia incondicional de 7 dias. Se por qualquer
+            motivo você não estiver satisfeito, basta entrar em contato conosco e reembolsaremos 100% do seu dinheiro. Sem perguntas!</p>
     </section>
 
     <!-- Security Badges -->
@@ -604,6 +698,7 @@
     <div class="notification" id="notification">
         🎉 <b>[Nome]</b> acabou de adquirir este programa!
     </div>
+
     <script>
         // Countdown Timer
         function getTimeRemaining() {
@@ -656,100 +751,6 @@
 
         updateClock();
         const timeinterval = setInterval(updateClock, 1000);
-        // Chat Functionality
-        const chatContainer = document.getElementById('chat-container');
-        const messageInput = document.getElementById('message-input');
-        const sendButton = document.getElementById('send-button');
-
-        const automatedMessages = [{
-                question: "O que vou aprender com este e-book?",
-                answer: "Neste e-book, você aprenderá métodos naturais e eficazes para controlar sua glicose, receitas saudáveis e dicas para um estilo de vida mais equilibrado."
-            },
-            {
-                question: "Por quanto tempo terei acesso ao conteúdo?",
-                answer: "Você terá acesso VITALÍCIO ao e-book e todas as atualizações futuras, sem custos adicionais."
-            },
-            {
-                question: "Este e-book é adequado para diabéticos tipo 1 e tipo 2?",
-                answer: "Sim, o e-book é adequado para diabéticos tipo 1 e tipo 2, pois oferece informações e dicas que podem ser adaptadas para diferentes necessidades."
-            },
-            {
-                question: "Quais são as formas de pagamento aceitas?",
-                answer: "Aceitamos diversas formas de pagamento, incluindo cartão de crédito, boleto bancário e PIX."
-            },
-            {
-                question: "Como receberei o e-book após a compra?",
-                answer: "Após a confirmação do pagamento, você receberá um e-mail com o link para download do e-book em formato PDF."
-            }
-        ];
-
-        function addMessage(message, isUser = false, avatar = "https://thispersondoesnotexist.com/") {
-            const messageDiv = document.createElement('div');
-            messageDiv.classList.add('message');
-
-            const img = document.createElement('img');
-            img.src = avatar;
-            img.alt = "Avatar";
-
-            const messageTextDiv = document.createElement('div');
-            messageTextDiv.classList.add('message-text');
-            messageTextDiv.textContent = message;
-
-            messageDiv.appendChild(img);
-            messageDiv.appendChild(messageTextDiv);
-            chatContainer.appendChild(messageDiv);
-
-            // Scroll to bottom
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-        }
-
-        function addAutomatedMessage() {
-            const randomMessage = automatedMessages[Math.floor(Math.random() * automatedMessages.length)];
-            const messageText = `${randomMessage.question}<br>${randomMessage.answer}`;
-            setTimeout(() => addMessage(messageText), Math.random() * 5000);
-        }
-
-        setInterval(addAutomatedMessage, 10000);
-
-        sendButton.addEventListener('click', () => {
-            const messageText = messageInput.value.trim();
-            if (messageText) {
-                addMessage(messageText, true);
-                messageInput.value = '';
-            }
-        });
-
-        messageInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                sendButton.click();
-            }
-        });
-
-        // FAQ Section
-        const faqQuestions = document.querySelectorAll('.faq-question');
-
-        faqQuestions.forEach(question => {
-            question.addEventListener('click', () => {
-                const answer = question.nextElementSibling;
-                answer.classList.toggle('show');
-            });
-        });
-        // Fake Sales Notifications
-        const names = ["Carlos", "Mariana", "Lucas", "Fernanda", "Ricardo", "Isabela"];
-
-        function showNotification() {
-            const notificationDiv = document.getElementById('notification');
-            const randomName = names[Math.floor(Math.random() * names.length)];
-            notificationDiv.innerHTML = `🎉 <b>${randomName}</b> acabou de adquirir este programa!`;
-            notificationDiv.classList.add('show');
-
-            setTimeout(() => {
-                notificationDiv.classList.remove('show');
-            }, 4000); // Remove a notificação após 4 segundos
-        }
-
-        setInterval(showNotification, 6000);
-
         // Back Redirect with Data Collection
         const dataCollectionForm = document.getElementById('dataCollectionForm');
         const userDataForm = document.getElementById('userDataForm');
@@ -772,8 +773,6 @@
 
             sendDataToWhatsApp(name, whatsapp, email);
             dataCollectionForm.style.display = 'none';
-
-            // Redirecionar para a página de oferta (substitua com a URL desejada)
             window.location.href = 'https://www.google.com';
         });
 
@@ -782,6 +781,34 @@
             showDataCollectionForm();
             event.returnValue = '';
         });
+
+        // Progress Bar
+        window.addEventListener('scroll', function () {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            let windowHeight = window.innerHeight || document.documentElement.clientHeight;
+            let documentHeight = document.documentElement.scrollHeight;
+
+            let progressBar = document.getElementById('progress-bar');
+            let progress = (scrollTop / (documentHeight - windowHeight)) * 100;
+
+            progressBar.style.width = progress + '%';
+        });
+
+        // Fake Sales Notifications
+        const names = ["Carlos", "Mariana", "Lucas", "Fernanda", "Ricardo", "Isabela"];
+
+        function showNotification() {
+            const notificationDiv = document.getElementById('notification');
+            const randomName = names[Math.floor(Math.random() * names.length)];
+            notificationDiv.innerHTML = `🎉 <b>${randomName}</b> acabou de adquirir este programa!`;
+            notificationDiv.classList.add('show');
+
+            setTimeout(() => {
+                notificationDiv.classList.remove('show');
+            }, 4000);
+        }
+
+        setInterval(showNotification, 6000);
     </script>
 </body>
 
