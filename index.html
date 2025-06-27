@@ -8,23 +8,21 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         /* Cores de Clínicas e Consultórios (Glamouroso) */
         :root {
             --primary-bg: #f7faff;
-            /* Azul bem claro */
             --secondary-bg: #e0f2f7;
             --accent-color: #3498db;
-            /* Azul mais forte */
             --success-green: #2ecc71;
-            /* Verde para o botão de CTA */
             --white: #FFFFFF;
             --dark-text: #333333;
             --shadow-color: rgba(0, 0, 0, 0.1);
             --gradient-start: #e0f2f7;
-            /* Início do gradiente */
             --gradient-end: #f7faff;
-            /* Fim do gradiente */
         }
 
         /* Estilos Globais */
@@ -37,7 +35,6 @@
             line-height: 1.6;
             overflow-x: hidden;
             position: relative;
-            /* Para posicionar as notificações */
         }
 
         /* Estilos da Headline */
@@ -66,9 +63,7 @@
         /* Estilos do Vídeo */
         .video-section {
             text-align: center;
-            /* Centraliza o vídeo */
             margin-bottom: 20px;
-            /* Adiciona margem abaixo do vídeo */
         }
 
         .video-container {
@@ -119,7 +114,6 @@
         /* Estilos do Botão */
         .cta-section {
             text-align: center;
-            /* Centraliza o botão */
             margin: 20px 0;
         }
 
@@ -187,17 +181,14 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px var(--shadow-color);
             width: 50%;
-            /* Ocupa metade da tela */
             margin-left: auto;
             margin-right: auto;
-            /* Centraliza na tela */
         }
 
         .chat-container {
             border: 1px solid #ddd;
             padding: 10px;
             height: 250px;
-            /* Altura ajustada */
             overflow-y: scroll;
             margin-bottom: 15px;
         }
@@ -320,18 +311,15 @@
             font-size: 1em;
             line-height: 1.4;
             display: none;
-            /* Esconde as respostas inicialmente */
         }
 
         .faq-answer.show {
             display: block;
-            /* Mostra as respostas quando a pergunta é clicada */
         }
 
         /* Estilos para as camadas de urgência */
         .urgency-banner {
             background-color: #ff9800;
-            /* Laranja chamativo */
             color: var(--white);
             text-align: center;
             padding: 10px;
@@ -341,7 +329,6 @@
 
         .limited-units {
             color: #d32f2f;
-            /* Vermelho para destacar */
             font-size: 1.2em;
             font-weight: bold;
             text-align: center;
@@ -365,10 +352,68 @@
 
         .security-badges img {
             width: 80px;
-            /* Ajuste o tamanho conforme necessário */
             margin: 0 10px;
             box-shadow: 0 2px 5px var(--shadow-color);
             border-radius: 5px;
+        }
+
+        /* Estilos para o botão do WhatsApp */
+        .whatsapp-button {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: #25D366;
+            color: var(--white);
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2em;
+            box-shadow: 0 2px 5px var(--shadow-color);
+            z-index: 1000;
+        }
+
+        .whatsapp-button i {
+            margin-right: 5px;
+        }
+
+        /* Estilos para o formulário de coleta de dados */
+        .data-collection-form {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .data-collection-form form {
+            background-color: var(--white);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px var(--shadow-color);
+            text-align: center;
+        }
+
+        .data-collection-form input {
+            margin: 10px 0;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 80%;
+            max-width: 300px;
+        }
+
+        .data-collection-form button {
+            background-color: var(--success-green);
+            color: var(--white);
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
         }
 
         /* Responsividade */
@@ -392,13 +437,30 @@
 
             .chat-section {
                 width: 90%;
-                /* Ocupa mais espaço em telas menores */
             }
         }
     </style>
 </head>
 
 <body>
+
+    <!-- Data Collection Form -->
+    <div class="data-collection-form" id="dataCollectionForm">
+        <form id="userDataForm">
+            <h2>Não vá embora!</h2>
+            <p>Antes de sair, deixe seus dados para receber uma oferta exclusiva:</p>
+            <input type="text" id="name" name="name" placeholder="Seu Nome">
+            <input type="tel" id="whatsapp" name="whatsapp" placeholder="Seu WhatsApp">
+            <input type="email" id="email" name="email" placeholder="Seu Email">
+            <button type="submit">Quero Receber a Oferta!</button>
+        </form>
+    </div>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/5547992691983" class="whatsapp-button" target="_blank">
+        <i class="fab fa-whatsapp"></i> Dúvidas?
+    </a>
+
     <!-- Camadas de Urgência -->
     <div class="urgency-banner">
         🔥 Últimas horas com 50% de desconto! Não perca essa chance! 🔥
@@ -525,7 +587,8 @@
             alt="Selo 1">
         <img src="https://cdn.prod.website-files.com/5ada5f3397c6972a671b1a27/5f7787c3cf856b1a21684fd9_Selo.png"
             alt="Selo 2">
-        <img src="https://static.vecteezy.com/ti/vetor-gratis/p1/4274496-aprovado-carimbo-plano-linear-longa-sombra-icone-aceitar-emblema-verde-adesivo-com-marca-linha-simbolo-vetor.jpg"
+        <img
+            src="https://static.vecteezy.com/ti/vetor-gratis/p1/4274496-aprovado-carimbo-plano-linear-longa-sombra-icone-aceitar-emblema-verde-adesivo-com-marca-linha-simbolo-vetor.jpg"
             alt="Selo 3">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSth5Z_BSugJYzFWgISKolq_t7EXxrMd8j2_w&s"
             alt="Selo 4">
@@ -642,7 +705,7 @@
 
         function addAutomatedMessage() {
             const randomMessage = automatedMessages[Math.floor(Math.random() * automatedMessages.length)];
-            const messageText = `<b>${randomMessage.question}</b><br>${randomMessage.answer}`;
+            const messageText = `${randomMessage.question}<br>${randomMessage.answer}`;
             setTimeout(() => addMessage(messageText), Math.random() * 5000);
         }
 
@@ -686,6 +749,39 @@
         }
 
         setInterval(showNotification, 6000);
+
+        // Back Redirect with Data Collection
+        const dataCollectionForm = document.getElementById('dataCollectionForm');
+        const userDataForm = document.getElementById('userDataForm');
+
+        function showDataCollectionForm() {
+            dataCollectionForm.style.display = 'flex';
+        }
+
+        function sendDataToWhatsApp(name, whatsapp, email) {
+            const message = `Novo lead!\nNome: ${name}\nWhatsApp: ${whatsapp}\nEmail: ${email}`;
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/5547992691983?text=${encodedMessage}`, '_blank');
+        }
+
+        userDataForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const whatsapp = document.getElementById('whatsapp').value;
+            const email = document.getElementById('email').value;
+
+            sendDataToWhatsApp(name, whatsapp, email);
+            dataCollectionForm.style.display = 'none';
+
+            // Redirecionar para a página de oferta (substitua com a URL desejada)
+            window.location.href = 'https://www.google.com';
+        });
+
+        window.addEventListener('beforeunload', function (event) {
+            event.preventDefault();
+            showDataCollectionForm();
+            event.returnValue = '';
+        });
     </script>
 </body>
 
